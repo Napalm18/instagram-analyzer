@@ -1,52 +1,68 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instagram Analyzer</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom right, #007bff, white);
-      text-align: center;
-      padding: 30px;
+      background: linear-gradient(135deg, #3f5efb, #ffffff);
+      color: #333;
     }
-    h1 {
-      color: #fff;
-      text-shadow: 1px 1px 2px #000;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
+
+    header {
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
       padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    a.btn {
-      display: block;
-      padding: 15px;
-      margin: 15px auto;
-      background: linear-gradient(to right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
+
+    .logo {
+      height: 50px;
     }
-    img.logo {
-      width: 100px;
-      margin-bottom: 20px;
+
+    nav button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      border: none;
+      background: #3f5efb;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    nav button:hover {
+      background: #2c3ed4;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100vh - 100px);
+      border: none;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="Logo" class="logo" />
-    <h1>Instagram Analyzer</h1>
-    <p>Escolha uma das opções abaixo:</p>
-    <a href="analise_token.html" class="btn">🔐 Analisar Perfil Conectado (via Token)</a>
-    <a href="analise_publica.html" class="btn">🔎 Analisar Perfil Público (@)</a>
-  </div>
+
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Logo" class="logo" id="logo">
+    <nav>
+      <button onclick="carregar('analisar_publico.html')">Análise Pública</button>
+      <button onclick="carregar('analisar_com_token.html')">Análise com Token</button>
+    </nav>
+  </header>
+
+  <iframe id="frame" src="analisar_publico.html"></iframe>
+
+  <script>
+    function carregar(pagina) {
+      document.getElementById('frame').src = pagina;
+    }
+  </script>
+
 </body>
 </html>
