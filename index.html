@@ -1,153 +1,173 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram Analyzer</title>
+  <title>Instagram Analyzer Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
     body {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Orbitron', sans-serif;
       color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
+      overflow-x: hidden;
     }
-    .container {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 30px;
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
-    h1 {
-      font-size: 2em;
-      margin-bottom: 15px;
-      color: #ffffff;
-    }
-    p {
-      margin-bottom: 25px;
-      font-size: 1.1em;
-      line-height: 1.5;
-      color: #dcdcdc;
-    }
-    input[type="text"] {
-      width: 80%;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      margin-bottom: 15px;
-    }
-    button {
-      padding: 12px 25px;
-      background: linear-gradient(90deg, #833ab4, #fd1d1d, #fcb045);
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    button:hover {
-      transform: scale(1.05);
-    }
-    .popup {
-      display: none;
+
+    #background {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.85);
-      border-radius: 20px;
-      padding: 30px;
-      color: white;
-      max-width: 400px;
-      z-index: 9999;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-      animation: fadeIn 0.6s ease-out;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      background: url('https://cdn.pixabay.com/animation/2022/09/30/13/44/13-44-34-946_512.gif') no-repeat center center/cover;
+      filter: brightness(0.3);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, -60%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
+
+    header {
+      padding: 2rem;
+      text-align: center;
     }
-    .popup img {
+
+    h1 {
+      font-size: 2.8rem;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    .analyzer-box {
+      max-width: 700px;
+      margin: 3rem auto;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #00f0ff;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 0 25px #00f0ff80;
+    }
+
+    .analyzer-box input[type="text"] {
       width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .close {
-      background: #ff3b3b;
-      border: none;
-      color: white;
-      font-weight: bold;
+      padding: 1rem;
       border-radius: 8px;
-      padding: 10px 20px;
-      margin-top: 10px;
+      border: none;
+      font-size: 1.2rem;
+    }
+
+    .analyzer-box button {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.2rem;
+      background: #00f0ff;
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: bold;
       cursor: pointer;
     }
-    .whatsapp {
-      margin-top: 25px;
-      display: inline-block;
-      background: #25d366;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s ease;
+
+    .result-popup {
+      margin-top: 2rem;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #00f0ff;
+      display: none;
     }
-    .whatsapp:hover {
-      background: #1ebd5a;
+
+    .result-popup img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #00f0ff;
+      margin-bottom: 1rem;
+    }
+
+    .result-popup ul {
+      list-style: none;
+    }
+
+    .result-popup ul li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #00f0ff40;
+    }
+
+    .whatsapp-button {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .whatsapp-button a {
+      background-color: #25D366;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 0 10px #25D366;
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Instagram Analyzer</h1>
-    <p>Digite o @ do perfil que deseja analisar e veja como melhorar suas vendas no Instagram.</p>
-    <input type="text" id="username" placeholder="@exemplo">
-    <button onclick="analisarPerfil()">Analisar Perfil</button>
-    <a class="whatsapp" href="https://wa.me/5511984852262?text=Quero%20Contratar!" target="_blank">Contratar via WhatsApp</a>
-  </div>
 
-  <div id="popup" class="popup">
-    <img src="https://i.imgur.com/yFHgxLl.png" alt="Preview do perfil">
-    <h3>Seu perfil foi analisado!</h3>
-    <p>
-      ⚠️ Pouca frequência de postagem.<br>
-      🎯 Falta de chamadas para ação (CTA).<br>
-      📷 Destaques sem capa ou sem padrão.<br>
-      🔥 Pouca identidade visual.<br>
-      📈 Potencial enorme de crescimento com tráfego pago e conteúdo profissional.
-    </p>
-    <p><strong>Podemos resolver tudo para você.</strong></p>
-    <button class="close" onclick="fecharPopup()">Fechar</button>
+<body>
+  <div id="background"></div>
+  <header>
+    <h1>Instagram Analyzer Pro</h1>
+  </header>
+
+  <div class="analyzer-box">
+    <input type="text" id="username" placeholder="Digite o @ do perfil...">
+    <button onclick="analyzeProfile()">Analisar Perfil</button>
+
+    <div class="result-popup" id="result">
+      <img id="profile-pic" src="" alt="Foto do perfil">
+      <ul id="suggestions"></ul>
+
+      <div class="whatsapp-button">
+        <a href="https://wa.me/5511984852262?text=Quero%20Contratar!" target="_blank">Quero Contratar!</a>
+      </div>
+    </div>
   </div>
 
   <script>
-    function analisarPerfil() {
+    function analyzeProfile() {
       const username = document.getElementById('username').value;
-      if (username.trim() !== '') {
-        document.getElementById('popup').style.display = 'block';
-      } else {
-        alert('Por favor, digite um @ válido.');
-      }
-    }
-    function fecharPopup() {
-      document.getElementById('popup').style.display = 'none';
+      if (!username) return alert("Por favor, digite um nome de usuário.");
+
+      // Foto fictícia para visual (substituir por API real se desejar)
+      document.getElementById("profile-pic").src = `https://unavatar.io/instagram/${username}`;
+
+      const dicas = [
+        "Seu perfil não está otimizado para vendas: inclua um destaque com depoimentos.",
+        "A bio poderia ser mais objetiva com chamada para ação (ex: clique no link).",
+        "A identidade visual não está padronizada. Crie um feed harmônico.",
+        "Faltam destaques estratégicos como Preços, Sobre e Resultados.",
+        "Você posta com baixa frequência. Crie um calendário de postagens.",
+        "Não há prova social (comentários, curtidas). Invista em engajamento.",
+        "O link na bio não está direcionando para um funil. Use um link com CTA.",
+        "Suas legendas não estão vendendo. Use gatilhos mentais e storytelling.",
+        "Não há vídeos ou reels recentes. Aproveite o alcance dos vídeos curtos.",
+        "Você não está usando hashtags estratégicas para seu nicho."
+      ];
+
+      const list = document.getElementById('suggestions');
+      list.innerHTML = "";
+      dicas.forEach(dica => {
+        const li = document.createElement("li");
+        li.innerText = dica;
+        list.appendChild(li);
+      });
+
+      document.getElementById('result').style.display = "block";
     }
   </script>
 </body>
+
 </html>
