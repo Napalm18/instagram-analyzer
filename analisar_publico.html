@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Análise Pública</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #007bff, #ffffff);
+      font-family: Arial, sans-serif;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    input {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #resultado {
+      margin-top: 20px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Análise de Perfil Público</h2>
+    <input type="text" id="usuario" placeholder="Digite o @ do Instagram">
+    <button onclick="analisar()">Simular Análise</button>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function analisar() {
+      const usuario = document.getElementById('usuario').value;
+      const resultado = document.getElementById('resultado');
+
+      if (!usuario.startsWith('@')) {
+        resultado.innerHTML = `<p style="color:red;">Por favor, comece com @</p>`;
+        return;
+      }
+
+      resultado.innerHTML = `
+        <h3>Resultado Simulado:</h3>
+        <p><strong>Perfil:</strong> ${usuario}</p>
+        <ul>
+          <li>📉 Pouco uso de Reels</li>
+          <li>📸 Falta de padrão visual no feed</li>
+          <li>📅 Baixa frequência de postagem</li>
+          <li>🧠 Bio genérica, pode ser mais estratégica</li>
+        </ul>
+        <p style="color: green;">Sugestão: usar stories interativos, investir em conteúdo com CTA e aplicar identidade visual.</p>
+      `;
+    }
+  </script>
+</body>
+</html>
