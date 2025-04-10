@@ -7,62 +7,123 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #3f5efb, #ffffff);
-      color: #333;
-    }
-
-    header {
-      background: #fff;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .logo {
-      height: 50px;
-    }
-
-    nav button {
-      margin-left: 10px;
-      padding: 10px 15px;
-      border: none;
-      background: #3f5efb;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1d1f33, #0d0f1f);
       color: #fff;
-      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #00c3ff;
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      margin: 1rem 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: #00c3ff;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
     }
 
-    nav button:hover {
-      background: #2c3ed4;
+    button:hover {
+      background: #0099cc;
     }
 
-    iframe {
+    .popup {
+      margin-top: 2rem;
+      padding: 2rem;
+      background: #10101a;
+      border: 2px solid #00c3ff;
+      border-radius: 15px;
+      display: none;
+    }
+
+    .popup h2 {
+      color: #00c3ff;
+    }
+
+    .popup img {
       width: 100%;
-      height: calc(100vh - 100px);
-      border: none;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .popup a {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #00c3ff;
+      color: white;
+      padding: 1rem;
+      text-decoration: none;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .popup a:hover {
+      background: #0077aa;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>📊 Analisador de Perfil Instagram</h1>
+    <input type="text" id="username" placeholder="Digite o @ do Instagram" />
+    <button onclick="analisarPerfil()">Analisar Perfil</button>
 
-  <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Logo" class="logo" id="logo">
-    <nav>
-      <button onclick="carregar('analisar_publico.html')">Análise Pública</button>
-      <button onclick="carregar('analisar_com_token.html')">Análise com Token</button>
-    </nav>
-  </header>
-
-  <iframe id="frame" src="analisar_publico.html"></iframe>
+    <div class="popup" id="resultado">
+      <h2>🔍 Análise Completa</h2>
+      <img src="https://i.imgur.com/gSVnUMc.png" alt="Perfil" />
+      <ul>
+        <li>❌ Falta identidade visual nas postagens</li>
+        <li>❌ Baixo uso de hashtags estratégicas</li>
+        <li>❌ Bio sem CTA e fraca para vendas</li>
+        <li>❌ Conteúdo sem frequência ou estratégia</li>
+        <li>❌ Destaques sem organização</li>
+      </ul>
+      <p><strong>🚨 Seu Instagram está travando suas vendas.</strong></p>
+      <p>Esses pequenos erros afastam clientes mesmo com um bom produto.</p>
+      <p>📈 Imagine um perfil profissional, com posts estratégicos e campanhas que realmente vendem.</p>
+      <a href="https://wa.me/5511984852262?text=Quero%20Contratar!" target="_blank">💬 Quero vender mais pelo Instagram</a>
+    </div>
+  </div>
 
   <script>
-    function carregar(pagina) {
-      document.getElementById('frame').src = pagina;
+    function analisarPerfil() {
+      const nome = document.getElementById("username").value;
+      if (nome === "") {
+        alert("Digite o nome do perfil!");
+        return;
+      }
+      document.getElementById("resultado").style.display = "block";
     }
   </script>
-
 </body>
 </html>
