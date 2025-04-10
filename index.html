@@ -1,128 +1,152 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instagram Analyzer</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1d1f33, #0d0f1f);
-      color: #fff;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
     }
-
     .container {
-      max-width: 700px;
-      width: 100%;
       background: rgba(255, 255, 255, 0.05);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0, 0, 255, 0.2);
       backdrop-filter: blur(10px);
-    }
-
-    h1 {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
       text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #00c3ff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
     }
-
-    input {
-      width: 100%;
-      padding: 1rem;
-      margin: 1rem 0;
-      border: none;
+    h1 {
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+    p {
+      margin-bottom: 25px;
+      font-size: 1.1em;
+      line-height: 1.5;
+      color: #dcdcdc;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
       border-radius: 10px;
-      font-size: 1rem;
+      border: none;
+      margin-bottom: 15px;
     }
-
     button {
-      width: 100%;
-      padding: 1rem;
-      background: #00c3ff;
-      color: white;
-      font-size: 1rem;
+      padding: 12px 25px;
+      background: linear-gradient(90deg, #833ab4, #fd1d1d, #fcb045);
       border: none;
       border-radius: 10px;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
+      transition: transform 0.3s ease;
     }
-
     button:hover {
-      background: #0099cc;
+      transform: scale(1.05);
     }
-
     .popup {
-      margin-top: 2rem;
-      padding: 2rem;
-      background: #10101a;
-      border: 2px solid #00c3ff;
-      border-radius: 15px;
       display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 20px;
+      padding: 30px;
+      color: white;
+      max-width: 400px;
+      z-index: 9999;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      animation: fadeIn 0.6s ease-out;
     }
-
-    .popup h2 {
-      color: #00c3ff;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
     }
-
     .popup img {
       width: 100%;
       border-radius: 10px;
-      margin-bottom: 1rem;
+      margin-bottom: 15px;
     }
-
-    .popup a {
-      display: inline-block;
-      margin-top: 1rem;
-      background: #00c3ff;
+    .close {
+      background: #ff3b3b;
+      border: none;
       color: white;
-      padding: 1rem;
-      text-decoration: none;
-      border-radius: 10px;
-      text-align: center;
+      font-weight: bold;
+      border-radius: 8px;
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
     }
-
-    .popup a:hover {
-      background: #0077aa;
+    .whatsapp {
+      margin-top: 25px;
+      display: inline-block;
+      background: #25d366;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .whatsapp:hover {
+      background: #1ebd5a;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>📊 Analisador de Perfil Instagram</h1>
-    <input type="text" id="username" placeholder="Digite o @ do Instagram" />
+    <h1>Instagram Analyzer</h1>
+    <p>Digite o @ do perfil que deseja analisar e veja como melhorar suas vendas no Instagram.</p>
+    <input type="text" id="username" placeholder="@exemplo">
     <button onclick="analisarPerfil()">Analisar Perfil</button>
+    <a class="whatsapp" href="https://wa.me/5511984852262?text=Quero%20Contratar!" target="_blank">Contratar via WhatsApp</a>
+  </div>
 
-    <div class="popup" id="resultado">
-      <h2>🔍 Análise Completa</h2>
-      <img src="https://i.imgur.com/gSVnUMc.png" alt="Perfil" />
-      <ul>
-        <li>❌ Falta identidade visual nas postagens</li>
-        <li>❌ Baixo uso de hashtags estratégicas</li>
-        <li>❌ Bio sem CTA e fraca para vendas</li>
-        <li>❌ Conteúdo sem frequência ou estratégia</li>
-        <li>❌ Destaques sem organização</li>
-      </ul>
-      <p><strong>🚨 Seu Instagram está travando suas vendas.</strong></p>
-      <p>Esses pequenos erros afastam clientes mesmo com um bom produto.</p>
-      <p>📈 Imagine um perfil profissional, com posts estratégicos e campanhas que realmente vendem.</p>
-      <a href="https://wa.me/5511984852262?text=Quero%20Contratar!" target="_blank">💬 Quero vender mais pelo Instagram</a>
-    </div>
+  <div id="popup" class="popup">
+    <img src="https://i.imgur.com/yFHgxLl.png" alt="Preview do perfil">
+    <h3>Seu perfil foi analisado!</h3>
+    <p>
+      ⚠️ Pouca frequência de postagem.<br>
+      🎯 Falta de chamadas para ação (CTA).<br>
+      📷 Destaques sem capa ou sem padrão.<br>
+      🔥 Pouca identidade visual.<br>
+      📈 Potencial enorme de crescimento com tráfego pago e conteúdo profissional.
+    </p>
+    <p><strong>Podemos resolver tudo para você.</strong></p>
+    <button class="close" onclick="fecharPopup()">Fechar</button>
   </div>
 
   <script>
     function analisarPerfil() {
-      const nome = document.getElementById("username").value;
-      if (nome === "") {
-        alert("Digite o nome do perfil!");
-        return;
+      const username = document.getElementById('username').value;
+      if (username.trim() !== '') {
+        document.getElementById('popup').style.display = 'block';
+      } else {
+        alert('Por favor, digite um @ válido.');
       }
-      document.getElementById("resultado").style.display = "block";
+    }
+    function fecharPopup() {
+      document.getElementById('popup').style.display = 'none';
     }
   </script>
 </body>
