@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Análise via Token</title>
+</head>
+<body>
+  <h2>Análise via Token</h2>
+  <p>Insira seu token abaixo:</p>
+  <input type="text" id="token" placeholder="Cole o token aqui" style="width: 90%; padding: 10px;" />
+  <button onclick="analisarToken()">Analisar</button>
+  <pre id="resultado"></pre>
+
+  <script>
+    async function analisarToken() {
+      const token = document.getElementById('token').value;
+      const res = await fetch(`https://graph.instagram.com/me?fields=id,username,account_type,media_count&access_token=${token}`);
+      const data = await res.json();
+      document.getElementById('resultado').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
