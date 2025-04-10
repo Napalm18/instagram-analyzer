@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram Analyzer Pro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analisador de Instagram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,157 +15,139 @@
 
     body {
       font-family: 'Orbitron', sans-serif;
-      color: white;
-      overflow-x: hidden;
+      color: #fff;
+      background: url('https://img.freepik.com/vetores-gratis/fundo-realista-abstrato-de-tecnologia-particula_23-2148431736.jpg') no-repeat center center fixed;
+      background-size: cover;
     }
 
-    #background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100vw;
-      height: 100vh;
-      background: url('https://cdn.pixabay.com/animation/2022/09/30/13/44/13-44-34-946_512.gif') no-repeat center center/cover;
-      filter: brightness(0.3);
-    }
-
-    header {
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
       padding: 2rem;
-      text-align: center;
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+
+    .logo {
+      max-width: 300px;
+      margin-bottom: 2rem;
     }
 
     h1 {
-      font-size: 2.8rem;
-      color: #0ff;
-      text-shadow: 0 0 10px #0ff;
-    }
-
-    .analyzer-box {
-      max-width: 700px;
-      margin: 3rem auto;
-      background: rgba(0, 0, 0, 0.7);
-      border: 2px solid #00f0ff;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 0 25px #00f0ff80;
-    }
-
-    .analyzer-box input[type="text"] {
-      width: 100%;
-      padding: 1rem;
-      border-radius: 8px;
-      border: none;
-      font-size: 1.2rem;
-    }
-
-    .analyzer-box button {
-      margin-top: 1rem;
-      width: 100%;
-      padding: 1rem;
-      font-size: 1.2rem;
-      background: #00f0ff;
-      border: none;
-      border-radius: 8px;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .result-popup {
-      margin-top: 2rem;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 1px solid #00f0ff;
-      display: none;
-    }
-
-    .result-popup img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid #00f0ff;
+      font-size: 2.5rem;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
       margin-bottom: 1rem;
     }
 
-    .result-popup ul {
-      list-style: none;
+    input[type="text"] {
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: none;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
     }
 
-    .result-popup ul li {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid #00f0ff40;
+    button {
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #00ffff;
+      color: #000;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
 
-    .whatsapp-button {
+    button:hover {
+      background-color: #00b3b3;
+    }
+
+    .popup {
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      padding: 2rem;
+      border-radius: 10px;
       margin-top: 2rem;
+      max-width: 600px;
       text-align: center;
+      box-shadow: 0 0 20px #00ffff;
     }
 
-    .whatsapp-button a {
+    .profile-pic {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      text-align: left;
+      margin-top: 1rem;
+    }
+
+    li::before {
+      content: "✔ ";
+      color: #00ffff;
+    }
+
+    .whatsapp-btn {
+      margin-top: 2rem;
       background-color: #25D366;
       color: white;
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      font-size: 1.2rem;
+      padding: 0.8rem 1.5rem;
       text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 0 10px #25D366;
+      border-radius: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
 
 <body>
-  <div id="background"></div>
-  <header>
-    <h1>Instagram Analyzer Pro</h1>
-  </header>
-
-  <div class="analyzer-box">
-    <input type="text" id="username" placeholder="Digite o @ do perfil...">
-    <button onclick="analyzeProfile()">Analisar Perfil</button>
-
-    <div class="result-popup" id="result">
-      <img id="profile-pic" src="" alt="Foto do perfil">
-      <ul id="suggestions"></ul>
-
-      <div class="whatsapp-button">
-        <a href="https://wa.me/5511984852262?text=Quero%20Contratar!" target="_blank">Quero Contratar!</a>
-      </div>
-    </div>
+  <div class="container">
+    <img src="imagem.png" alt="Logo ClickArt Analyzer" class="logo" />
+    <h1>Analisador de Instagram</h1>
+    <input type="text" id="username" placeholder="Digite o @ do perfil" />
+    <button onclick="analisarPerfil()">Analisar</button>
+    <div id="popup" class="popup" style="display:none;"></div>
   </div>
 
   <script>
-    function analyzeProfile() {
-      const username = document.getElementById('username').value;
-      if (!username) return alert("Por favor, digite um nome de usuário.");
+    function analisarPerfil() {
+      const username = document.getElementById("username").value;
+      const popup = document.getElementById("popup");
 
-      // Foto fictícia para visual (substituir por API real se desejar)
-      document.getElementById("profile-pic").src = `https://unavatar.io/instagram/${username}`;
+      if (!username) {
+        alert("Digite o nome de usuário!");
+        return;
+      }
 
-      const dicas = [
-        "Seu perfil não está otimizado para vendas: inclua um destaque com depoimentos.",
-        "A bio poderia ser mais objetiva com chamada para ação (ex: clique no link).",
-        "A identidade visual não está padronizada. Crie um feed harmônico.",
-        "Faltam destaques estratégicos como Preços, Sobre e Resultados.",
-        "Você posta com baixa frequência. Crie um calendário de postagens.",
-        "Não há prova social (comentários, curtidas). Invista em engajamento.",
-        "O link na bio não está direcionando para um funil. Use um link com CTA.",
-        "Suas legendas não estão vendendo. Use gatilhos mentais e storytelling.",
-        "Não há vídeos ou reels recentes. Aproveite o alcance dos vídeos curtos.",
-        "Você não está usando hashtags estratégicas para seu nicho."
-      ];
+      const fotoPerfil = `https://instagram.com/${username}/media/?size=t`;
 
-      const list = document.getElementById('suggestions');
-      list.innerHTML = "";
-      dicas.forEach(dica => {
-        const li = document.createElement("li");
-        li.innerText = dica;
-        list.appendChild(li);
-      });
-
-      document.getElementById('result').style.display = "block";
+      popup.innerHTML = `
+        <img src='https://www.instagram.com/${username}/profile_pic' class='profile-pic' alt='Perfil'>
+        <h2>@${username}</h2>
+        <p>Análise rápida do perfil:</p>
+        <ul>
+          <li>Melhorar a bio com palavras-chave relevantes</li>
+          <li>Adicionar destaques profissionais com capa personalizada</li>
+          <li>Postar com frequência estratégica</li>
+          <li>Utilizar carrosséis e Reels para maior alcance</li>
+          <li>Usar legendas com CTA (chamada para ação)</li>
+          <li>Responder todos os comentários e directs</li>
+          <li>Organizar o feed com identidade visual</li>
+          <li>Adicionar link inteligente na bio</li>
+        </ul>
+        <a href="https://wa.me/5511984852262?text=Quero%20Contratar!" class="whatsapp-btn" target="_blank">Quero Melhorar Meu Instagram</a>
+      `;
+      popup.style.display = "block";
     }
   </script>
 </body>
