@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Análise com Token</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #007bff, #ffffff);
+      font-family: Arial, sans-serif;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    input {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #resultado {
+      margin-top: 20px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Análise de Perfil via Token</h2>
+    <input type="text" id="token" placeholder="Cole aqui o token de acesso">
+    <button onclick="analisar()">Analisar Perfil</button>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    async function analisar() {
+      const token = document.getElementById('token').value;
+      const resultado = document.getElementById('resultado');
+      resultado.innerHTML = 'Analisando...';
+
+      try {
+        const res = await fetch(`https://graph.instagram.com/me?fields=id,username,account_type,media_count&access_token=${token}`);
+        const data = await res.json();
+
+        if (data.error) {
+          resultado.innerHTML = `<strong>Erro:</strong> ${data.error.message}`;
+        } else {
+          resultado.innerHTML = `
+            <h3>Resultado da Análise:</h3>
+            <p><strong>Usuário:</strong> @${data.username}</p>
+            <p><strong>Tipo de conta:</strong> ${data.account_type}</p>
+            <p><strong>Número de postagens:</strong> ${data.media_count}</p>
+            <p style="color: green;">✅ Perfil conectado corretamente!</p>
+          `;
+        }
+      } catch (error) {
+        resultado.innerHTML = 'Erro ao processar o token.';
+      }
+    }
+  </script>
+</body>
+</html>
