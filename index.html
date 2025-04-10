@@ -1,153 +1,225 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Analisador de Instagram</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
     body {
+      margin: 0;
       font-family: 'Orbitron', sans-serif;
-      color: #fff;
-      background: url('https://img.freepik.com/vetores-gratis/fundo-realista-abstrato-de-tecnologia-particula_23-2148431736.jpg') no-repeat center center fixed;
+      background: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...') no-repeat center center fixed;
       background-size: cover;
-    }
-
-    .container {
+      color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: start;
       min-height: 100vh;
-      padding: 2rem;
-      background-color: rgba(0, 0, 0, 0.75);
     }
 
-    .logo {
-      max-width: 300px;
-      margin-bottom: 2rem;
+    header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 30px 20px 10px;
+      animation: fadeInDown 1s ease forwards;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo-upload {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #fff;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-upload input {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
     }
 
     h1 {
       font-size: 2.5rem;
-      color: #00ffff;
-      text-shadow: 0 0 10px #00ffff;
-      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #00ffe7, #8300ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ffe7, 0 0 20px #00ffe7;
+      }
+      to {
+        text-shadow: 0 0 20px #8300ff, 0 0 30px #8300ff;
+      }
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .input-area {
+      margin-bottom: 20px;
     }
 
     input[type="text"] {
-      padding: 0.8rem;
-      border-radius: 10px;
-      border: none;
       width: 100%;
-      max-width: 400px;
-      margin-bottom: 1rem;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
       font-size: 1rem;
+      background-color: #222;
+      color: #0ff;
+      box-shadow: 0 0 10px #0ff inset;
     }
 
     button {
-      padding: 0.8rem 2rem;
+      padding: 12px 20px;
+      background: linear-gradient(90deg, #00ffe7, #8300ff);
       border: none;
-      border-radius: 10px;
-      background-color: #00ffff;
-      color: #000;
+      color: white;
       font-weight: bold;
-      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease;
+      border-radius: 6px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
 
     button:hover {
-      background-color: #00b3b3;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffe7;
     }
 
     .popup {
-      background-color: rgba(0, 0, 0, 0.9);
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    .popup h2 {
+      color: #fcb045;
+    }
+
+    a.btn-whatsapp {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 16px;
+      background-color: #25d366;
       color: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      margin-top: 2rem;
-      max-width: 600px;
-      text-align: center;
-      box-shadow: 0 0 20px #00ffff;
-    }
-
-    .profile-pic {
-      border-radius: 50%;
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      margin-bottom: 1rem;
-    }
-
-    ul {
-      list-style: none;
-      text-align: left;
-      margin-top: 1rem;
-    }
-
-    li::before {
-      content: "✔ ";
-      color: #00ffff;
-    }
-
-    .whatsapp-btn {
-      margin-top: 2rem;
-      background-color: #25D366;
-      color: white;
-      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
       text-decoration: none;
-      border-radius: 10px;
       font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    a.btn-whatsapp:hover {
+      background-color: #1ebe57;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <img src="imagem.png" alt="Logo ClickArt Analyzer" class="logo" />
+  <header>
+    <div class="logo-upload">
+      <input type="file" accept="image/*" title="Clique para trocar o logo" />
+    </div>
     <h1>Analisador de Instagram</h1>
-    <input type="text" id="username" placeholder="Digite o @ do perfil" />
-    <button onclick="analisarPerfil()">Analisar</button>
-    <div id="popup" class="popup" style="display:none;"></div>
-  </div>
+  </header>
+
+  <main>
+    <div class="input-area">
+      <input type="text" placeholder="Digite o @ do Instagram" id="inputInstagram" />
+    </div>
+    <button onclick="analisarPerfil()">Analisar Perfil</button>
+
+    <div id="resultado" class="popup" style="display: none;">
+      <h2>📊 Resultados da Análise</h2>
+      <ul id="analiseLista"></ul>
+      <a class="btn-whatsapp" id="compartilharAnalise" href="#" target="_blank">📤 Enviar Análise por WhatsApp</a>
+    </div>
+  </main>
 
   <script>
+    function gerarMensagemWhatsApp(nomePerfil, analise) {
+      const titulo = `📊 *Análise do Instagram @${nomePerfil}*`;
+      const corpo = analise.map(item => `- ${item}`).join('\n');
+      const rodape = `\n🚀 Posso te ajudar a melhorar tudo isso com estratégias personalizadas.`;
+      const contato = `\n👉 *Me chama aqui pra conversarmos:* https://wa.me/5511984852262?text=Quero%20melhorar%20meu%20Instagram!`;
+      return `${titulo}\n\n${corpo}${rodape}${contato}`;
+    }
+
     function analisarPerfil() {
-      const username = document.getElementById("username").value;
-      const popup = document.getElementById("popup");
+      const input = document.getElementById('inputInstagram').value.trim();
+      const resultado = document.getElementById('resultado');
+      const lista = document.getElementById('analiseLista');
+      const botaoCompartilhar = document.getElementById('compartilharAnalise');
+      lista.innerHTML = '';
+      if (input === '') return;
 
-      if (!username) {
-        alert("Digite o nome de usuário!");
-        return;
-      }
+      resultado.style.display = 'block';
 
-      const fotoPerfil = `https://instagram.com/${username}/media/?size=t`;
+      const sugestoes = [
+        '✅ Sua bio deve conter proposta de valor clara + chamada para ação. Ex: "Sobrancelha perfeita com técnica exclusiva | Agende no link 👇"',
+        '✅ Adicione link clicável na bio. WhatsApp direto funciona melhor para vendas!',
+        '✅ Crie destaques como "Procedimentos", "Antes e Depois", "Depoimentos", "Localização" com ícones personalizados.',
+        '✅ Seus Reels têm o dobro de curtidas comparado aos posts comuns. Use bastidores, vídeos rápidos e depoimentos!',
+        '✅ Seus seguidores interagem mais entre 19h e 21h. Programe as postagens nesse horário.',
+        '✅ Falta padrão de identidade visual. Crie uma paleta de cores e use fontes consistentes.',
+        '✅ Use mais CTAs nas legendas. Ex: "Comente ❤️ se gostou", "Clique no link da bio agora".',
+        '✅ Posts com promoções e resultados reais (antes e depois) performaram melhor. Publique mais desse tipo!'
+      ];
 
-      popup.innerHTML = `
-        <img src='https://www.instagram.com/${username}/profile_pic' class='profile-pic' alt='Perfil'>
-        <h2>@${username}</h2>
-        <p>Análise rápida do perfil:</p>
-        <ul>
-          <li>Melhorar a bio com palavras-chave relevantes</li>
-          <li>Adicionar destaques profissionais com capa personalizada</li>
-          <li>Postar com frequência estratégica</li>
-          <li>Utilizar carrosséis e Reels para maior alcance</li>
-          <li>Usar legendas com CTA (chamada para ação)</li>
-          <li>Responder todos os comentários e directs</li>
-          <li>Organizar o feed com identidade visual</li>
-          <li>Adicionar link inteligente na bio</li>
-        </ul>
-        <a href="https://wa.me/5511984852262?text=Quero%20Contratar!" class="whatsapp-btn" target="_blank">Quero Melhorar Meu Instagram</a>
-      `;
-      popup.style.display = "block";
+      sugestoes.forEach(texto => {
+        const li = document.createElement('li');
+        li.innerText = texto;
+        lista.appendChild(li);
+      });
+
+      const nomePerfil = input.replace('@', '');
+      const msg = gerarMensagemWhatsApp(nomePerfil, sugestoes);
+      const link = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      botaoCompartilhar.href = link;
     }
   </script>
 </body>
