@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Análise Pública</title>
+</head>
+<body>
+  <h2>Análise de Perfil Público</h2>
+  <p>Digite o @ do perfil:</p>
+  <input type="text" id="username" placeholder="@usuario" style="width: 90%; padding: 10px;" />
+  <button onclick="mostrarSugestao()">Analisar</button>
+  <pre id="resultado"></pre>
+
+  <script>
+    function mostrarSugestao() {
+      const user = document.getElementById('username').value;
+      const sugestoes = `Analisando o perfil ${user}...\n\nSugestões gerais:\n✅ Use biografia clara com CTA\n✅ Poste com frequência\n✅ Utilize Reels e Stories\n✅ Interaja com seguidores nos comentários\n✅ Use hashtags relevantes e locais`;
+      document.getElementById('resultado').textContent = sugestoes;
+    }
+  </script>
+</body>
+</html>
